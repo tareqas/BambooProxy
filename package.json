@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "anyproxy": "^4.0.10",
-    "straightforward": "^2.0.3"
+    "http-proxy": "^1.17.0"
   }
 }

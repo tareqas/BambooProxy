@@ -1,22 +1,15 @@
-const Straightforward = require('straightforward')
+var http = require('http'),
+    httpProxy = require('http-proxy');
+//
+// Create your proxy server and set the target in the options.
+//
+httpProxy.createProxyServer({target:'https://vk.com'}).listen(3000); // See (†)
  
-;(async () => {
-  // Start proxy server
-  const sf = await new Straightforward().listen(8080)
-  console.log(`Proxy listening on http://localhost:9191(8080)`)
- 
-  // Log http requests
-  sf.onRequest(async ({ req, res }, next) => {
-    console.log(`http request: ${req.url}`)
-    // Note the common middleware pattern, use `next()`
-    // to pass the request to the next handler.
-    return next()
-  })
- 
-  // Log connect (https) requests
-  sf.onConnect(async ({ req, res }, next) => {
-    console.log(`connect request: ${req.url}`)
-    return next()
-  })
- 
-})()
+//
+// Create your target server
+// //
+// http.createServer(function (req, res) {
+//   res.writeHead(200, { 'Content-Type': 'text/plain' });
+//   res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
+//   res.end();
+// }).listen(9000);
